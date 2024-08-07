@@ -1,0 +1,11 @@
+{
+  "name": "snipshare-frontend",
+  "version": "1.0.0",
+  "description": "SnipShare is a simple, user-friendly platform designed for sharing and storing text snippets with ease.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lurky-phish-2085",
+  "license": "ISC"
+}
