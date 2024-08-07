@@ -1,5 +1,5 @@
 // Define the API endpoint
-const apiUrl = 'http://127.0.0.1:8080/api/v1/snip/1vqqtyZb'
+const apiUrl = 'http://127.0.0.1:8080/api/v1/snip/TrTg7oO6'
 
 // Function to fetch data from the API
 async function fetchData() {
