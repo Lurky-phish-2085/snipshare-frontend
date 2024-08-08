@@ -11,7 +11,7 @@ async function fetchSnippet(retrievalId) {
   fetch(`${backendApi}/${retrievalId}`)
     .then(response => {
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error(`Snip: ${retrievalId} doesn't exist or there is a server error...`);
       }
 
       return response.json();
@@ -20,7 +20,7 @@ async function fetchSnippet(retrievalId) {
       updateContent(data.content)
     })
     .catch(error => {
-      console.error(error);
+      updateContent(error);
     })
 }
 
