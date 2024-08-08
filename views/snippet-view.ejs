@@ -12,6 +12,7 @@
         padding: 16px;
       }
     </style>
+    <script src="/js/fetch-snip.js" defer></script>
   </head>
   <body>
     <hgroup>
@@ -20,8 +21,12 @@
     </hgroup>
     <h2>Content</h2>
     <article id="content">
+      <%= userId %>
     </article>
 
-    <script src="fetch-snip.js"></script>
+    <script>
+    // Pass the userId from EJS to a JavaScript variable
+    window.userId = '<%= userId %>';
+    </script>
   </body>
 </html>

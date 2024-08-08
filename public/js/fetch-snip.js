@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const data = window
+  const data = window.userId;
 
   const content = document.getElementById('content');
-  content.innerHTML = 'TEST: ' + data;
-})
+  console.log(data);
+});
