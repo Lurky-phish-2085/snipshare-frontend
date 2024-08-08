@@ -33,7 +33,7 @@ function setFormInteractivity(isInteractive) {
 }
 
 async function submitForm(jsonData) {
-  await new Promise(resolve => setTimeout(resolve, 1000));
+  await new Promise(resolve => setTimeout(resolve, 250));
 
   fetch(backendApi, {
     method: 'POST',
