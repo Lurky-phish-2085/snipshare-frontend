@@ -6,27 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
-    <style>
-      body {
-        padding: 16px;
-      }
-    </style>
     <script src="/js/fetch-snip.js" defer></script>
   </head>
   <body>
-    <hgroup>
-      <h1>SnipShare</h1>
-      <p>Share snippets of text easily!</p>
-    </hgroup>
-    <h2>Content</h2>
-    <article id="content">
-      <h4>LOADING...</h4>
-    </article>
+    <main class="container">
+      <hgroup>
+        <h1>SnipShare</h1>
+        <p>Share snippets of text easily!</p>
+      </hgroup>
+      <h2>Content</h2>
+      <article id="content">
+        <h4>LOADING...</h4>
+      </article>
+    </main>
 
     <script>
-    // Pass the userId from EJS to a JavaScript variable
-    window.userId = '<%= userId %>';
+      // Pass the userId from EJS to a JavaScript variable
+      window.userId = '<%= userId %>';
     </script>
   </body>
 </html>
