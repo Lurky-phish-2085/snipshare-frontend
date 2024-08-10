@@ -3,15 +3,20 @@
   <head>
     <title>SnipShare</title>
     <meta charset="UTF-8">
+    <meta name="color-scheme" content="light dark">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
   </head>
   <body>
-    <main class="container">
+    <header class="container">
       <hgroup>
-        <h1>SnipShare</h1>
+        <a style="text-decoration: none;" href="http://localhost:3000">
+          <h1 style="margin: 0;">SnipShare</h1>
+        </a>
         <p>Share snippets of text easily!</p>
       </hgroup>
+    </header>
+    <main class="container">
       <form id="form">
         <label for="content">Content</label>
         <textarea name="content" rows="4" cols="50"></textarea>
