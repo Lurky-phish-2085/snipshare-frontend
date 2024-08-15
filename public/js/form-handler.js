@@ -9,11 +9,9 @@ form.addEventListener('submit', (event) => {
 
   const formData = new FormData(form);
 
-  const disposable = formData.get('disposable');
-
   const jsonData = {
     'content': formData.get('content'),
-    'isDisposable': disposable.length != 0,
+    'isDisposable': formData.get('disposable') === 'true',
     'expiryDate': formData.get('expiry-date'),
   };
 
