@@ -19,12 +19,18 @@
     </header>
     <main class="container">
       <form id="form">
-        <label for="content">Content</label>
-        <textarea name="content" rows="4" cols="50"></textarea>
-        <label for="expiry-date">Expiry Date</label>
-        <input type="date" name="expiry-date" value="">
-        <label for="disposable">Dispose after read</label>
-        <input type="checkbox" name="disposable" value="true">
+        <label for="content">
+          Content
+          <textarea name="content" rows="4" cols="50"></textarea>
+        </label>
+        <label for="expiry-date">
+          Expiry Date
+          <input type="date" name="expiry-date" value="">
+        </label>
+        <label for="disposable">
+          Dispose after read
+          <input type="checkbox" name="disposable" value="true">
+        </label>
         <button type="submit">Submit</button>
       </form>
       <div id="result"></div>
