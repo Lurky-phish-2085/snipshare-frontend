@@ -8,10 +8,21 @@ form.addEventListener('submit', (event) => {
   event.preventDefault();
 
   const formData = new FormData(form);
+  const content = formData.get('content');
+  let title = formData.get('title');
+  const altTitle = content
+    .split(/\s+/)
+    .slice(0, 10)
+    .join(' ')
+    .trim();
+
+  title = title === "" ? altTitle : title;
+
+  console.log(title);
 
   const jsonData = {
-    'content': formData.get('content'),
-    'title': 'TEST',
+    'content': content,
+    'title': title,
     'isDisposable': formData.get('disposable') === 'true',
     'expiryDate': formData.get('expiry-date'),
   };
