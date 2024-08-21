@@ -11,6 +11,7 @@ form.addEventListener('submit', (event) => {
 
   const jsonData = {
     'content': formData.get('content'),
+    'title': 'TEST',
     'isDisposable': formData.get('disposable') === 'true',
     'expiryDate': formData.get('expiry-date'),
   };
@@ -48,10 +49,11 @@ async function submitForm(jsonData) {
         throw new Error('Network response was not ok');
       }
 
-      return response.json();
+      return response.headers.get('Location');
     })
     .then(data => {
-      updateResult(data.retrievalId);
+      const retrievalId = data.split("/").pop();
+      updateResult(retrievalId);
     })
     .catch(error => {
       console.error(error);
