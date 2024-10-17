@@ -2,14 +2,20 @@
   "name": "snipshare-frontend",
   "version": "1.0.0",
   "description": "SnipShare is a simple, user-friendly platform designed for sharing and storing text snippets with ease.",
-  "main": "index.js",
+  "main": "./src/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/app.js",
+    "dev": "nodemon ./src/app.js"
   },
   "author": "Lurky-phish-2085",
   "license": "ISC",
   "dependencies": {
+    "class-transformer": "^0.5.1",
     "ejs": "^3.1.10",
     "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
   }
 }

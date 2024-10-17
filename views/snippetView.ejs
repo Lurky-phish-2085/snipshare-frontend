@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SnipShare</title>
+    <meta charset="UTF-8" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    />
+    <!-- <script src="/js/fetch-snip.js" defer></script> -->
+  </head>
+  <body>
+    <header class="container">
+      <hgroup>
+        <a style="text-decoration: none" href="http://localhost:3000">
+          <h1 style="margin: 0">SnipShare</h1>
+        </a>
+        <p>Share snippets of text easily!</p>
+      </hgroup>
+    </header>
+    <main id="main" class="container">
+      <% if (snip) { %>
+      <article>
+        <p><%= snip %></p>
+      </article>
+      <% } else { %>
+      <article>
+        <h2>NOT FOUND</h2>
+        <p>Snip must have been expired, disposed, or deleted by the owner.</p>
+        <form action="/" , method="get">
+          <button type="submit">Create Snip</button>
+        </form>
+      </article>
+      <% } %>
+    </main>
+  </body>
+</html>
