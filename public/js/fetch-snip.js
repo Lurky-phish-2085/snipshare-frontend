@@ -1,28 +1,30 @@
-const backendApi = 'http://localhost:8080/api/v1/snip';
+const backendApi = "http://localhost:8080/api/v1/snip";
 let retrievalId = null;
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   retrievalId = window.userId;
-  fetchSnippet(retrievalId)
+  fetchSnippet(retrievalId);
 });
 
 async function fetchSnippet(retrievalId) {
   // await new Promise(resolve => setTimeout(resolve, 250));
 
   fetch(`${backendApi}/${retrievalId}`)
-    .then(response => {
+    .then((response) => {
       if (!response.ok) {
-        throw new Error(`Snip: ${retrievalId} doesn't exist or there is a server error...`);
+        throw new Error(
+          `Snip: ${retrievalId} doesn't exist or there is a server error...`
+        );
       }
 
       return response.json();
     })
-    .then(data => {
+    .then((data) => {
       updateContent(data);
     })
-    .catch(error => {
+    .catch((error) => {
       updateContent(error);
-    })
+    });
 }
 
 const disposableSnipWarningHTML = `
@@ -57,48 +59,47 @@ const notFoundHTML = `
 `;
 
 function updateContent(snipData) {
-  const main = document.getElementById('main');
+  const main = document.getElementById("main");
   let deleteWarning = null;
   let openSnipBtn = null;
 
   if (snipData instanceof Error) {
     main.innerHTML = notFoundHTML;
-    const createSnipBtn = document.getElementById('create-snip-btn');
-    createSnipBtn.addEventListener('click', (event) => {
-      window.location.href = 'http://localhost:3000'
-    })
+    const createSnipBtn = document.getElementById("create-snip-btn");
+    createSnipBtn.addEventListener("click", (event) => {
+      window.location.href = "http://localhost:3000";
+    });
     return;
   }
 
   if (snipData.isDisposable) {
     main.innerHTML = disposableSnipWarningHTML;
-    deleteWarning = document.getElementById('delete-warning');
-    openSnipBtn = document.getElementById('open-snip-btn');
+    deleteWarning = document.getElementById("delete-warning");
+    openSnipBtn = document.getElementById("open-snip-btn");
 
-    openSnipBtn.addEventListener('click', (event) => {
+    openSnipBtn.addEventListener("click", (event) => {
       openSnipBtn.disabled = true;
 
-      fetch(`${backendApi}/${retrievalId}`, 
-        {
-          method: 'DELETE'
-        }
-      ).then(response => {
+      fetch(`${backendApi}/${retrievalId}`, {
+        method: "DELETE",
+      })
+        .then((response) => {
           if (!response.status === 204) {
-            throw new Error('Network response was not ok');
+            throw new Error("Network response was not ok");
           }
 
           deleteWarning.remove();
           main.innerHTML = snipDisplayHTML;
-          const content = document.getElementById('content');
+          const content = document.getElementById("content");
           content.innerText = snipData.content;
-      }).catch(error => {
+        })
+        .catch((error) => {
           console.error(error);
-      })
-
-    })
+        });
+    });
   } else {
-      main.innerHTML = snipDisplayHTML;
-      const content = document.getElementById('content');
-      content.innerText = snipData.content;
+    main.innerHTML = snipDisplayHTML;
+    const content = document.getElementById("content");
+    content.innerText = snipData.content;
   }
 }
