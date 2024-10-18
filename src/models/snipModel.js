@@ -1,4 +1,4 @@
-const { instanceToPlain } = require("class-transformer");
+const { instanceToPlain, plainToInstance } = require("class-transformer");
 const { response } = require("express");
 
 class Snip {
@@ -8,28 +8,31 @@ class Snip {
     author,
     isdisposable,
     expires,
-    createdat,
-    expirydate
+    createdAt,
+    expiryDate
   ) {
     this.content = content;
     this.title = title;
     this.author = author;
     this.isdisposable = isdisposable;
     this.expires = expires;
-    this.createdat = createdat;
-    this.expirydate = expirydate;
+    this.createdAt = createdAt;
+    this.expiryDate = expiryDate;
   }
 
   static async findById(id) {
-    return await fetch(`http://localhost:8080/api/v1/snip/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    const retrievedSnip = await fetch(
+      `http://localhost:8080/api/v1/snip/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((response) => {
         if (!response.ok) {
-          throw new Error("AAAAAAAAAAAAA");
+          throw new Error(`Response status: is ${response.status}`);
         }
 
         return response.json();
@@ -40,6 +43,8 @@ class Snip {
       .catch((e) => {
         console.error(e);
       });
+
+    return plainToInstance(Snip, retrievedSnip);
   }
 
   toJSON() {
