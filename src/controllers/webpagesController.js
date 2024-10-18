@@ -6,9 +6,7 @@ const index = (req, res) => {
 
 const snippetViewPage = async (req, res) => {
   const { id } = req.params;
-
-  const retrievedSnip = await Snip.findById(id);
-  const snip = JSON.stringify(retrievedSnip);
+  const snip = await Snip.findById(id);
 
   res.render("snippetView", { snip });
 };
