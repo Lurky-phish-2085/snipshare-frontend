@@ -6,10 +6,9 @@ const port = 3000;
 app.set("view engine", "ejs");
 app.set("views", "views");
 app.use(express.static("public"));
-
 app.use(setDefaultHeaders());
 
-app.use(require("./routes/webpagesRoutes"));
+app.use(require("./routes/viewRoutes"));
 
 app.use(notFoundPage());
 
