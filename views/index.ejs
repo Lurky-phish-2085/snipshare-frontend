@@ -13,7 +13,7 @@
   <body>
     <header class="container">
       <hgroup>
-        <a style="text-decoration: none" href="http://localhost:3000">
+        <a style="text-decoration: none" href="/">
           <h1 style="margin: 0">SnipShare</h1>
         </a>
         <p>Share snippets of text easily!</p>
@@ -48,5 +48,44 @@
       </form>
       <div id="result"></div>
     </main>
+
+    <script>
+      const form = document.querySelector("form");
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+
+        const json = {
+          content: formData.get("content"),
+          title: formData.get("title"),
+          isDisposable: formData.get("disposable") === "true",
+          expiryDate: formData.get("expiry-date"),
+        };
+
+        fetch("/api/v1/service/submitSnip", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(json),
+        })
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error("Network response was not ok.");
+            }
+          })
+          .then((data) => {
+            window.location.href = data.redirectUrl;
+          })
+          .catch((error) => {
+            console.error(
+              "There was a problem with the fetch operation:",
+              error
+            );
+          });
+      });
+    </script>
   </body>
 </html>
