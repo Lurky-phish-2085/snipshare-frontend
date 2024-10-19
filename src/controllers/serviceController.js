@@ -5,7 +5,7 @@ const submitSnip = async (req, res) => {
   const snip = new Snip(content, title, isDisposable, expiryDate);
   const id = await snip.save();
 
-  res.redirect(`/${id}`);
+  res.status(200).send({ redirectUrl: `/${id}` });
 };
 
 module.exports = {
