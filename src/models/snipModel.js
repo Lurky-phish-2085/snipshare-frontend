@@ -5,16 +5,16 @@ class Snip {
   constructor(
     content,
     title,
-    author,
-    isdisposable,
-    expires,
-    createdAt,
-    expiryDate
+    isDisposable,
+    expiryDate,
+    author = null,
+    expires = null,
+    createdAt = null
   ) {
     this.content = content;
     this.title = title;
     this.author = author;
-    this.isdisposable = isdisposable;
+    this.isDisposable = isDisposable;
     this.expires = expires;
     this.createdAt = createdAt;
     this.expiryDate = expiryDate;
@@ -45,6 +45,31 @@ class Snip {
       });
 
     return plainToInstance(Snip, retrievedSnip);
+  }
+
+  async save() {
+    return await fetch("http://localhost:8080/api/v1/snip", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(this.toJSON()),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Response status is: ${response.status}`);
+        }
+
+        return response.headers.get("Location");
+      })
+      .then((data) => {
+        const retrievalId = data.split("/").pop();
+
+        return retrievalId;
+      })
+      .catch((e) => {
+        console.error(e);
+      });
   }
 
   toJSON() {
