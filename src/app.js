@@ -5,10 +5,12 @@ const port = 3000;
 
 app.set("view engine", "ejs");
 app.set("views", "views");
+app.use(express.json());
 app.use(express.static("public"));
 app.use(setDefaultHeaders());
 
 app.use(require("./routes/viewRoutes"));
+app.use(require("./routes/serviceRoutes"));
 
 app.use(notFoundPage());
 
