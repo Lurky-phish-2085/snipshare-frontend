@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SnipShare</title>
+    <meta charset="UTF-8" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    />
+  </head>
+  <body>
+    <header class="container">
+      <hgroup>
+        <a style="text-decoration: none" href="/">
+          <h1 style="margin: 0">SnipShare</h1>
+        </a>
+        <p>Share snippets of text easily!</p>
+      </hgroup>
+    </header>
+    <main class="container">
+      <form id="form" action="<%= submitSnipUrl %>" , method="post">
+        <label for="title">
+          Title
+          <input type="text" name="title" />
+        </label>
+        <label for="content">
+          Content
+          <textarea name="content" rows="12" cols="50"></textarea>
+        </label>
+        <fieldset>
+          <label for="expiryDate">
+            Expiry Date
+            <input type="date" name="expiryDate" value="" />
+          </label>
+          <label for="disposable">
+            <input
+              onchange="updateDisposableSwitchValue()"
+              type="checkbox"
+              role="switch"
+              name="disposable"
+              value="false"
+              id="disposable-input"
+            />
+            Dispose after read
+          </label>
+        </fieldset>
+        <button type="submit">Submit</button>
+      </form>
+      <div id="result"></div>
+    </main>
+
+    <script>
+      function updateDisposableSwitchValue() {
+        const disposableInput = document.querySelector("#disposable-input");
+        disposableInput.value = disposableInput.checked;
+      }
+    </script>
+  </body>
+</html>
