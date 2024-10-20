@@ -9,9 +9,18 @@ const index = (req, res) => {
 
 const snippet = async (req, res) => {
   const { id } = req.params;
-  const snip = await Snip.findById(id);
+  const { dispose } = req.body;
+  console.log(dispose);
 
-  res.render("snippet", { snip });
+  let snip = await Snip.findById(id, { metadataOnly: true });
+
+  if (snip) {
+    if (!snip.isDisposable || dispose) {
+      snip = await Snip.findById(id);
+      snip.isDisposable = false;
+    }
+  }
+  res.render("snippet", { id, snip });
 };
 
 module.exports = {
