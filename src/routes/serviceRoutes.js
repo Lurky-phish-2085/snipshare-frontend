@@ -4,7 +4,7 @@ const handler = require("../controllers/serviceController");
 const BASE = "/api/v1/service";
 const SUBMIT_SNIP = `${BASE}/submitSnip`;
 
-const routeUrls = {
+const endpoints = {
   BASE,
   SUBMIT_SNIP,
 };
@@ -15,5 +15,5 @@ router.post(SUBMIT_SNIP, handler.submitSnip);
 
 module.exports = {
   router,
-  routeUrls,
+  endpoints,
 };

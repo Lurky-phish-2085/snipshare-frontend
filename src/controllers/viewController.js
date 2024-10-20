@@ -1,8 +1,8 @@
-const serviceRoutes = require("../routes/serviceRoutes").routeUrls;
+const serviceRouteEndpoints = require("../routes/serviceRoutes").endpoints;
 const Snip = require("../models/snipModel");
 
 const index = (req, res) => {
-  const submitSnipUrl = serviceRoutes.SUBMIT_SNIP;
+  const submitSnipUrl = serviceRouteEndpoints.SUBMIT_SNIP;
 
   res.render("index", { submitSnipUrl });
 };
