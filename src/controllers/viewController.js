@@ -1,7 +1,10 @@
+const serviceRoutes = require("../routes/serviceRoutes").routeUrls;
 const Snip = require("../models/snipModel");
 
 const index = (req, res) => {
-  res.render("index");
+  const submitSnipUrl = serviceRoutes.SUBMIT_SNIP;
+
+  res.render("index", { submitSnipUrl });
 };
 
 const snippet = async (req, res) => {

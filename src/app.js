@@ -1,4 +1,5 @@
 const express = require("express");
+const serviceRoutes = require("./routes/serviceRoutes");
 
 const app = express();
 const port = 3000;
@@ -11,7 +12,7 @@ app.use(express.static("public"));
 app.use(setDefaultHeaders());
 
 app.use(require("./routes/viewRoutes"));
-app.use(require("./routes/serviceRoutes"));
+app.use(serviceRoutes.router);
 
 app.use(notFoundPage());
 

@@ -20,7 +20,7 @@
       </hgroup>
     </header>
     <main class="container">
-      <form id="form" action="/api/v1/service/submitSnip" , method="post">
+      <form id="form" action="<%= submitSnipUrl %>" , method="post">
         <label for="title">
           Title
           <input type="text" name="title" />
@@ -36,10 +36,12 @@
           </label>
           <label for="disposable">
             <input
+              onchange="updateDisposableSwitchValue()"
               type="checkbox"
               role="switch"
               name="disposable"
               value="false"
+              id="disposable-input"
             />
             Dispose after read
           </label>
@@ -48,5 +50,12 @@
       </form>
       <div id="result"></div>
     </main>
+
+    <script>
+      function updateDisposableSwitchValue() {
+        const disposableInput = document.querySelector("#disposable-input");
+        disposableInput.value = disposableInput.checked;
+      }
+    </script>
   </body>
 </html>
