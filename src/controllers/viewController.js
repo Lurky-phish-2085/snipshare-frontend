@@ -10,7 +10,6 @@ const index = (req, res) => {
 const snippet = async (req, res) => {
   const { id } = req.params;
   const { dispose } = req.body;
-  console.log(dispose);
 
   let snip = await Snip.findById(id, { metadataOnly: true });
 

@@ -37,7 +37,29 @@
             Open Snip
           </button>
         </form>
+        <button
+          id="copy-link-btn"
+          type="submit"
+          value="http://localhost:3000/<%= id %>"
+        >
+          Copy link to clipboard
+        </button>
       </article>
+      <script>
+        const copyLinkBtn = document.querySelector("#copy-link-btn");
+        copyLinkBtn.addEventListener("click", (event) => {
+          const link = copyLinkBtn.value;
+
+          navigator.clipboard
+            .writeText(link)
+            .then(() => {
+              alert("Copied to clipboard!");
+            })
+            .catch((err) => {
+              console.error("Failed to copy: ", err);
+            });
+        });
+      </script>
       <% } else { %>
       <h1><%= snip.title %></h1>
       <hr />
