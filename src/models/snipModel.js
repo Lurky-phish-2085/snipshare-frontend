@@ -20,16 +20,20 @@ class Snip {
     this.expiryDate = expiryDate;
   }
 
-  static async findById(id) {
-    const retrievedSnip = await fetch(
-      `http://localhost:8080/api/v1/snip/${id}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
+  static async findById(id, options = { metadataOnly: false }) {
+    let endpoint = `http://localhost:8080/api/v1/snip/${id}?`;
+
+    if (options != null) {
+      const { metadataOnly } = options;
+      endpoint += `metadataOnly=${metadataOnly}`;
+    }
+
+    const retrievedSnip = await fetch(endpoint, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Response status: is ${response.status}`);
