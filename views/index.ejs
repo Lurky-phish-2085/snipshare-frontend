@@ -26,12 +26,20 @@
   </head>
   <body>
     <header class="container">
-      <hgroup>
-        <a style="text-decoration: none" href="/">
-          <h1 style="margin: 0">SnipShare</h1>
-        </a>
-        <p>Share snippets of text easily!</p>
-      </hgroup>
+      <nav>
+        <hgroup>
+          <a style="text-decoration: none" href="/">
+            <h1 style="margin: 0">SnipShare</h1>
+          </a>
+          <p>Share snippets of text easily!</p>
+        </hgroup>
+        <div>
+          <ul>
+            <li><a href="/auth/login">Login</a></li>
+            <li><a href="/auth/register">Register</a></li>
+          </ul>
+        </div>
+      </nav>
     </header>
     <main class="container">
       <form id="form" action="<%= submitSnipUrl %>" , method="post">

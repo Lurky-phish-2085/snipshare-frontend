@@ -22,7 +22,17 @@ const snippet = async (req, res) => {
   res.render("snippet", { id, snip });
 };
 
+const login = (req, res) => {
+  res.render("login");
+};
+
+const register = (req, res) => {
+  res.render("register");
+};
+
 module.exports = {
   index,
   snippet,
+  login,
+  register,
 };
