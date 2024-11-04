@@ -10,12 +10,13 @@
   },
   "author": "Lurky-phish-2085",
   "license": "ISC",
-  "dependencies": {
-    "class-transformer": "^0.5.1",
-    "ejs": "^3.1.10",
-    "express": "^4.19.2"
-  },
   "devDependencies": {
     "nodemon": "^3.1.7"
+  },
+  "dependencies": {
+    "class-transformer": "^0.5.1",
+    "cookie-parser": "^1.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.1"
   }
 }

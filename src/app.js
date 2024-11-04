@@ -1,4 +1,6 @@
 const express = require("express");
+const cookieParser = require("cookie-parser");
+const authRoutes = require("./routes/authRoutes");
 const serviceRoutes = require("./routes/serviceRoutes");
 
 const app = express();
@@ -8,10 +10,12 @@ app.set("view engine", "ejs");
 app.set("views", "views");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(express.static("public"));
 app.use(setDefaultHeaders());
 
 app.use(require("./routes/viewRoutes"));
+app.use(authRoutes.router);
 app.use(serviceRoutes.router);
 
 app.use(notFoundPage());
