@@ -24,7 +24,9 @@ const snippet = async (req, res) => {
 };
 
 const login = (req, res) => {
-  res.render("login");
+  const loginUrl = authRouteEndpoints.LOGIN;
+
+  res.render("login", { loginUrl });
 };
 
 const register = (req, res) => {
