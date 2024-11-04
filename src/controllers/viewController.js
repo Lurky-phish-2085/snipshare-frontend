@@ -5,7 +5,12 @@ const Snip = require("../models/snipModel");
 const index = (req, res) => {
   const submitSnipUrl = serviceRouteEndpoints.SUBMIT_SNIP;
 
-  res.render("index", { submitSnipUrl });
+  const { authUser } = req;
+  const { jwt } = req.cookies;
+  console.log(authUser);
+  console.log(jwt);
+
+  res.render("index", { submitSnipUrl, authUser });
 };
 
 const snippet = async (req, res) => {
