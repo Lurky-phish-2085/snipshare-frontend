@@ -33,11 +33,25 @@
           </a>
           <p>Share snippets of text easily!</p>
         </hgroup>
-        <div>
+        <div style="flex-direction: column">
+          <% if (authUser) { %>
+          <br />
+          <details class="dropdown">
+            <summary style="border: none" role="button" class="outline">
+              <%= authUser.username %>
+            </summary>
+            <ul>
+              <li><a href="/profile">Profile</a></li>
+              <li><a href="<%= logoutUrl %>">Logout</a></li>
+            </ul>
+          </details>
+          <ul></ul>
+          <% } else { %>
           <ul>
             <li><a href="/login">Login</a></li>
             <li><a href="/register">Register</a></li>
           </ul>
+          <% } %>
         </div>
       </nav>
     </header>
