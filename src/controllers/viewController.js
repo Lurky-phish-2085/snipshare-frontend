@@ -1,10 +1,16 @@
 const serviceRouteEndpoints = require("../routes/serviceRoutes").endpoints;
+const authRouteEndpoints = require("../routes/authRoutes").endpoints;
 const Snip = require("../models/snipModel");
 
 const index = (req, res) => {
   const submitSnipUrl = serviceRouteEndpoints.SUBMIT_SNIP;
 
-  res.render("index", { submitSnipUrl });
+  const { authUser } = req;
+  const { jwt } = req.cookies;
+  console.log(authUser);
+  console.log(jwt);
+
+  res.render("index", { submitSnipUrl, authUser });
 };
 
 const snippet = async (req, res) => {
@@ -23,11 +29,15 @@ const snippet = async (req, res) => {
 };
 
 const login = (req, res) => {
-  res.render("login");
+  const loginUrl = authRouteEndpoints.LOGIN;
+
+  res.render("login", { loginUrl });
 };
 
 const register = (req, res) => {
-  res.render("register");
+  const registrationUrl = authRouteEndpoints.REGISTER;
+
+  res.render("register", { registrationUrl });
 };
 
 module.exports = {
