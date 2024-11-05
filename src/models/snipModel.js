@@ -51,10 +51,11 @@ class Snip {
     return plainToInstance(Snip, retrievedSnip);
   }
 
-  async save() {
+  async save(token = null) {
     return await fetch("http://localhost:8080/api/v1/snip", {
       method: "POST",
       headers: {
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(this.toJSON()),
