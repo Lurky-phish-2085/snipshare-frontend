@@ -12,8 +12,11 @@ const index = (req, res) => {
 };
 
 const snippet = async (req, res) => {
+  const logoutUrl = authRouteEndpoints.LOGOUT;
+
   const { id } = req.params;
   const { dispose } = req.body;
+  const { authUser } = req;
 
   let snip = await Snip.findById(id, { metadataOnly: true });
 
@@ -23,7 +26,7 @@ const snippet = async (req, res) => {
       snip.isDisposable = false;
     }
   }
-  res.render("snippet", { id, snip });
+  res.render("snippet", { id, snip, authUser, logoutUrl });
 };
 
 const login = (req, res) => {
