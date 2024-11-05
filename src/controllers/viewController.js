@@ -38,9 +38,18 @@ const register = (req, res) => {
   res.render("register", { registrationUrl });
 };
 
+const profile = (req, res) => {
+  const logoutUrl = authRouteEndpoints.LOGOUT;
+
+  const { authUser } = req;
+
+  res.render("profile", { authUser, logoutUrl });
+};
+
 module.exports = {
   index,
   snippet,
   login,
   register,
+  profile,
 };

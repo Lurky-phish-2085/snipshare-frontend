@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SnipShare</title>
+    <meta charset="UTF-8" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/favicons/favicon-48x48.png"
+      sizes="48x48"
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg" />
+    <link rel="shortcut icon" href="/favicons/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicons/apple-touch-icon.png"
+    />
+    <link rel="manifest" href="/favicons/site.webmanifest" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    />
+  </head>
+  <body class="container">
+    <header>
+      <nav>
+        <hgroup>
+          <a style="text-decoration: none" href="/">
+            <h1 style="margin: 0">SnipShare</h1>
+          </a>
+          <p>Share snippets of text easily!</p>
+        </hgroup>
+        <div style="flex-direction: column">
+          <% if (authUser) { %>
+          <br />
+          <details class="dropdown">
+            <summary style="border: none" role="button" class="outline">
+              <%= authUser.username %>
+            </summary>
+            <ul>
+              <li><a href="/profile">Profile</a></li>
+              <li><a href="<%= logoutUrl %>">Logout</a></li>
+            </ul>
+          </details>
+          <ul></ul>
+          <% } %>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <article>
+        <p>Welcome to the profile dashboard!</p>
+      </article>
+      <article>
+        <hgroup>
+          <h2>Snips</h2>
+          <p>Manage your snips here!</p>
+        </hgroup>
+        <p>Nothing is here...</p>
+      </article>
+      <article>
+        <hgroup>
+          <h2>Profile Information</h2>
+          <p>View and Edit your profile information here!</p>
+        </hgroup>
+        <%= JSON.stringify(authUser) %>
+      </article>
+      <article>
+        <hgroup>
+          <h2>Statistics</h2>
+          <p>View your statistics on this website!</p>
+        </hgroup>
+      </article>
+    </main>
+  </body>
+</html>
