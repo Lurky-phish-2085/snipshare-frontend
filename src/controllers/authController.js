@@ -82,7 +82,13 @@ const register = (req, res) => {
     });
 };
 
+const logout = (req, res) => {
+  res.cookie("jwt", "", { httpOnly: true });
+  res.redirect("/");
+};
+
 module.exports = {
   login,
   register,
+  logout,
 };
