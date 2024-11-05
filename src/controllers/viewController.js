@@ -4,13 +4,11 @@ const Snip = require("../models/snipModel");
 
 const index = (req, res) => {
   const submitSnipUrl = serviceRouteEndpoints.SUBMIT_SNIP;
+  const logoutUrl = authRouteEndpoints.LOGOUT;
 
   const { authUser } = req;
-  const { jwt } = req.cookies;
-  console.log(authUser);
-  console.log(jwt);
 
-  res.render("index", { submitSnipUrl, authUser });
+  res.render("index", { submitSnipUrl, authUser, logoutUrl });
 };
 
 const snippet = async (req, res) => {
@@ -40,9 +38,18 @@ const register = (req, res) => {
   res.render("register", { registrationUrl });
 };
 
+const profile = (req, res) => {
+  const logoutUrl = authRouteEndpoints.LOGOUT;
+
+  const { authUser } = req;
+
+  res.render("profile", { authUser, logoutUrl });
+};
+
 module.exports = {
   index,
   snippet,
   login,
   register,
+  profile,
 };

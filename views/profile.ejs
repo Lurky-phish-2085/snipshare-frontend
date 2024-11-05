@@ -24,8 +24,8 @@
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
     />
   </head>
-  <body>
-    <header class="container">
+  <body class="container">
+    <header>
       <nav>
         <hgroup>
           <a style="text-decoration: none" href="/">
@@ -46,52 +46,34 @@
             </ul>
           </details>
           <ul></ul>
-          <% } else { %>
-          <ul>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/register">Register</a></li>
-          </ul>
           <% } %>
         </div>
       </nav>
     </header>
-    <main class="container">
-      <form id="form" action="<%= submitSnipUrl %>" , method="post">
-        <label for="title">
-          Title
-          <input type="text" name="title" />
-        </label>
-        <label for="content">
-          Content
-          <textarea name="content" rows="12" cols="50"></textarea>
-        </label>
-        <fieldset>
-          <label for="expiryDate">
-            Expiry Date
-            <input type="date" name="expiryDate" value="" />
-          </label>
-          <label for="disposable">
-            <input
-              onchange="updateDisposableSwitchValue()"
-              type="checkbox"
-              role="switch"
-              name="disposable"
-              value="false"
-              id="disposable-input"
-            />
-            Dispose after read
-          </label>
-        </fieldset>
-        <button type="submit">Submit</button>
-      </form>
-      <div id="result"></div>
+    <main>
+      <article>
+        <p>Welcome to the profile dashboard!</p>
+      </article>
+      <article>
+        <hgroup>
+          <h2>Snips</h2>
+          <p>Manage your snips here!</p>
+        </hgroup>
+        <p>Nothing is here...</p>
+      </article>
+      <article>
+        <hgroup>
+          <h2>Profile Information</h2>
+          <p>View and Edit your profile information here!</p>
+        </hgroup>
+        <%= JSON.stringify(authUser) %>
+      </article>
+      <article>
+        <hgroup>
+          <h2>Statistics</h2>
+          <p>View your statistics on this website!</p>
+        </hgroup>
+      </article>
     </main>
-
-    <script>
-      function updateDisposableSwitchValue() {
-        const disposableInput = document.querySelector("#disposable-input");
-        disposableInput.value = disposableInput.checked;
-      }
-    </script>
   </body>
 </html>
