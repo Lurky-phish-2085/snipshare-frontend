@@ -1,6 +1,11 @@
-function auth() {
+function authValidation() {
   return async (req, res, next) => {
     const { jwt } = req.cookies;
+
+    if (!jwt) {
+      next();
+      return;
+    }
 
     await fetch(`http://localhost:8080/api/v1/auth/validate`, {
       method: "GET",
@@ -39,4 +44,4 @@ function auth() {
   };
 }
 
-module.exports = auth;
+module.exports = authValidation;

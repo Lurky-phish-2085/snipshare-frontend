@@ -1,6 +1,6 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
-const auth = require("./middlewares/auth");
+const authValidation = require("./middlewares/authValidation");
 const customHeaders = require("./middlewares/customHeaders");
 const notFoundPage = require("./middlewares/notFoundPage");
 const authRoutes = require("./routes/authRoutes");
@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(customHeaders());
-app.use(auth());
+app.use(authValidation());
 
 app.use(require("./routes/viewRoutes"));
 app.use(authRoutes.router);
