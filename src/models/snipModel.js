@@ -1,5 +1,4 @@
 const { instanceToPlain, plainToInstance } = require("class-transformer");
-const { response } = require("express");
 
 class Snip {
   constructor(
@@ -52,12 +51,18 @@ class Snip {
   }
 
   async save(token = null) {
+    const headers = !token
+      ? {
+          "Content-Type": "application/json",
+        }
+      : {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        };
+
     return await fetch("http://localhost:8080/api/v1/snip", {
       method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
+      headers,
       body: JSON.stringify(this.toJSON()),
     })
       .then((response) => {
