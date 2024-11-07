@@ -36,6 +36,10 @@ function authValidation() {
         });
       })
       .catch((error) => {
+        res.cookie("jwt", "", {
+          httpOnly: true,
+        });
+
         console.error("Error: ", error);
       })
       .finally(() => {
