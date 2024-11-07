@@ -29,6 +29,41 @@ const snippet = async (req, res) => {
   res.render("snippet", { id, snip, authUser, logoutUrl });
 };
 
+const authorSnips = async (req, res) => {
+  const deleteUrl = serviceRouteEndpoints.DELETE_SNIP;
+  const logoutUrl = authRouteEndpoints.LOGOUT;
+
+  const { authUser } = req;
+  const { name } = req.params;
+
+  const snips = await Snip.findByAuthor(name);
+
+  res.render("authorSnips", {
+    snips,
+    name,
+    authUser,
+    deleteUrl,
+    logoutUrl,
+  });
+};
+
+const snipEdit = async (req, res) => {
+  const patchSnipUrl = serviceRouteEndpoints.PATCH_SNIP;
+  const logoutUrl = authRouteEndpoints.LOGOUT;
+  const { id } = req.params;
+  const { authUser } = req;
+
+  const snip = await Snip.findById(id);
+
+  res.render("snipEdit", {
+    snip,
+    id,
+    authUser,
+    patchSnipUrl,
+    logoutUrl,
+  });
+};
+
 const login = (req, res) => {
   const loginUrl = authRouteEndpoints.LOGIN;
 
@@ -52,6 +87,8 @@ const profile = (req, res) => {
 module.exports = {
   index,
   snippet,
+  authorSnips,
+  snipEdit,
   login,
   register,
   profile,

@@ -59,42 +59,39 @@
       </nav>
     </header>
     <main class="container">
-      <form id="form" action="<%= submitSnipUrl %>" , method="post">
+      <form
+        id="form"
+        action="<%= `${patchSnipUrl}/${snip.retrievalId}` %>"
+        ,
+        method="post"
+      >
         <label for="title">
           Title
-          <input type="text" name="title" />
+          <input type="text" name="title" value="<%= snip.title %>" required />
         </label>
         <label for="content">
           Content
-          <textarea name="content" rows="12" cols="50"></textarea>
+          <textarea name="content" rows="12" cols="50" required>
+<%= snip.content %></textarea
+          >
         </label>
         <fieldset>
           <label for="expiryDate">
             Expiry Date
-            <input type="date" name="expiryDate" value="" />
-          </label>
-          <label for="disposable">
             <input
-              onchange="updateDisposableSwitchValue()"
-              type="checkbox"
-              role="switch"
-              name="disposable"
-              value="false"
-              id="disposable-input"
+              type="date"
+              name="expiryDate"
+              value="<%= snip.expiryDate %>"
             />
-            Dispose after read
           </label>
         </fieldset>
-        <button type="submit">Submit</button>
+        <button type="submit">Save</button>
       </form>
-      <div id="result"></div>
+      <button style="border: none" class="outline secondary" type="submit">
+        <a style="text-decoration: none" href="<%= `/u/${authUser.username}` %>"
+          >Cancel</a
+        >
+      </button>
     </main>
-
-    <script>
-      function updateDisposableSwitchValue() {
-        const disposableInput = document.querySelector("#disposable-input");
-        disposableInput.value = disposableInput.checked;
-      }
-    </script>
   </body>
 </html>

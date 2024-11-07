@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SnipShare</title>
+    <meta charset="UTF-8" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/favicons/favicon-48x48.png"
+      sizes="48x48"
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg" />
+    <link rel="shortcut icon" href="/favicons/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicons/apple-touch-icon.png"
+    />
+    <link rel="manifest" href="/favicons/site.webmanifest" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header class="container">
+      <nav>
+        <hgroup>
+          <a style="text-decoration: none" href="/">
+            <h1 style="margin: 0">SnipShare</h1>
+          </a>
+          <p>Share snippets of text easily!</p>
+        </hgroup>
+        <div style="flex-direction: column">
+          <% if (authUser) { %>
+          <ul>
+            <li><a href="<%= `/u/${authUser.username}` %>">My Snips</a></li>
+            <li>
+              <details class="dropdown">
+                <summary style="border: none" role="button" class="outline">
+                  <%= authUser.username %>
+                </summary>
+                <ul>
+                  <li><a href="/profile">Profile</a></li>
+                  <li><a href="<%= logoutUrl %>">Logout</a></li>
+                </ul>
+              </details>
+            </li>
+          </ul>
+          <% } else { %>
+          <ul>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+          </ul>
+          <% } %>
+        </div>
+      </nav>
+    </header>
+    <main id="main" class="container">
+      <h2>
+        <%= (authUser && authUser.username === name) ? "Your Snips" : `${name}'s
+        Snips` %>
+      </h2>
+      <% if (snips.length === 0) { %>
+      <h3>SNIPS EMPTY</h3>
+      <% } else { %> <% snips.forEach((snip) => { %> <% const snipDeleteDialogId
+      = `a${snip.retrievalId}-dialog` %> <% const deleteModalBtnId =
+      `a${snip.retrievalId}-delete-modal-btn` %> <% const cancelModalBtnId =
+      `a${snip.retrievalId}-cancel-modal-btn` %> <% const dialog =
+      `a${snip.retrievalId}Dialog` %> <% const showDialogBtn =
+      `a${snip.retrievalId}ShowDialogBtn` %> <% const cancelDialogBtn =
+      `a${snip.retrievalId}CancelDialogBtn` %>
+      <article>
+        <% if (authUser && authUser.username === snip.author) { %>
+        <nav>
+          <h3><a href="<%= `/${snip.retrievalId}` %>"><%= snip.title %></a></h3>
+          <div>
+            <details class="dropdown">
+              <summary style="border: none" role="button" class="outline">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  style="fill: rgba(0, 0, 0, 1)"
+                >
+                  <path
+                    d="M12 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+                  ></path>
+                </svg>
+              </summary>
+              <ul>
+                <li>
+                  <a href="<%= `/${snip.retrievalId}/edit` %>">Edit</a>
+                </li>
+                <li>
+                  <a id="<%= deleteModalBtnId %>" href="">Delete</a>
+                </li>
+              </ul>
+            </details>
+          </div>
+        </nav>
+        <form action="<%= `${deleteUrl}/${snip.retrievalId}` %>" method="post">
+          <dialog id="<%= snipDeleteDialogId %>">
+            <article>
+              <h2>Delete Snip?</h2>
+              <p>This action can't be <strong>undone.</strong></p>
+              <footer>
+                <button type="button" class="outline" style="border: none">
+                  <a id="<%= cancelModalBtnId %>" style="text-decoration: none"
+                    >Cancel</a
+                  >
+                </button>
+                <button style="background-color: red; border-color: crimson">
+                  DELETE
+                </button>
+              </footer>
+            </article>
+          </dialog>
+        </form>
+        <script>
+          const <%= dialog %> = document.querySelector(
+            "<%= `#${snipDeleteDialogId}`  %>"
+          );
+          const <%= showDialogBtn %> = document.querySelector("<%= `#${deleteModalBtnId}` %>");
+          const <%= cancelDialogBtn %> = document.querySelector("<%= `#${cancelModalBtnId}` %>");
+          <%= showDialogBtn %>.addEventListener("click", (event) => {
+            event.preventDefault();
+            <%= dialog %>.showModal();
+          });
+          <%= cancelDialogBtn %>.addEventListener("click", (event) => {
+            event.preventDefault();
+            <%= dialog %>.close();
+          });
+        </script>
+        <% } else { %>
+        <h3><a href="<%= `/${snip.retrievalId}` %>"><%= snip.title %></a></h3>
+        <% } %>
+        <hr />
+        <nav>
+          <p>
+            <span><i class="bx bxs-calendar"></i></span>
+            <%= snip.createdAt %>
+          </p>
+          <p>
+            <span><i class="bx bxs-stopwatch"></i></span>
+            <% if (snip.expires) { %> <%= snip.expiryDate %> <% } else { %>
+            NEVER <% } %>
+          </p>
+          <p>
+            <span><i class="fas fa-eye"></i></span>
+            69 (TEST)
+          </p>
+        </nav>
+      </article>
+      <% }); %> <% } %>
+    </main>
+  </body>
+</html>
