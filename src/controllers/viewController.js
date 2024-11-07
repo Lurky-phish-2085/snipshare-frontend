@@ -29,6 +29,17 @@ const snippet = async (req, res) => {
   res.render("snippet", { id, snip, authUser, logoutUrl });
 };
 
+const authorSnips = async (req, res) => {
+  const logoutUrl = authRouteEndpoints.LOGOUT;
+
+  const { authUser } = req;
+  const { name } = req.params;
+
+  const snips = await Snip.findByAuthor(name);
+
+  res.render("authorSnips", { snips, name, authUser, logoutUrl });
+};
+
 const login = (req, res) => {
   const loginUrl = authRouteEndpoints.LOGIN;
 
@@ -52,6 +63,7 @@ const profile = (req, res) => {
 module.exports = {
   index,
   snippet,
+  authorSnips,
   login,
   register,
   profile,
