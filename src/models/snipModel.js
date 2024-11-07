@@ -8,7 +8,8 @@ class Snip {
     expiryDate,
     author = null,
     expires = null,
-    createdAt = null
+    createdAt = null,
+    retrievalId = null
   ) {
     this.content = content;
     this.title = title;
@@ -17,6 +18,7 @@ class Snip {
     this.expires = expires;
     this.createdAt = createdAt;
     this.expiryDate = expiryDate;
+    this.retrievalId = retrievalId;
   }
 
   static async findById(id, options = { metadataOnly: false }) {
