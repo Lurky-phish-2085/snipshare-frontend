@@ -50,6 +50,32 @@ class Snip {
     return plainToInstance(Snip, retrievedSnip);
   }
 
+  static async findByAuthor(author) {
+    const endpoint = `http://localhost:8080/api/v1/snip/author/${author}`;
+
+    const retrievedSnips = await fetch(endpoint, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Response status: is ${response.status}`);
+        }
+
+        return response.json();
+      })
+      .then((data) => {
+        return data.snips;
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+
+    return plainToInstance(Snip, retrievedSnips);
+  }
+
   async save(token = null) {
     const headers = !token
       ? {
