@@ -33,19 +33,22 @@
           </a>
           <p>Share snippets of text easily!</p>
         </hgroup>
-        <div style="flex-direction: column">
+        <div>
           <% if (authUser) { %>
-          <br />
-          <details class="dropdown">
-            <summary style="border: none" role="button" class="outline">
-              <%= authUser.username %>
-            </summary>
-            <ul>
-              <li><a href="/profile">Profile</a></li>
-              <li><a href="<%= logoutUrl %>">Logout</a></li>
-            </ul>
-          </details>
-          <ul></ul>
+          <ul>
+            <li><a href="<%= `/u/${authUser.username}` %>">My Snips</a></li>
+            <li>
+              <details class="dropdown">
+                <summary style="border: none" role="button" class="outline">
+                  <%= authUser.username %>
+                </summary>
+                <ul>
+                  <li><a href="/profile">Profile</a></li>
+                  <li><a href="<%= logoutUrl %>">Logout</a></li>
+                </ul>
+              </details>
+            </li>
+          </ul>
           <% } else { %>
           <ul>
             <li><a href="/login">Login</a></li>
