@@ -72,7 +72,13 @@
       </h2>
       <% if (snips.length === 0) { %>
       <h3>SNIPS EMPTY</h3>
-      <% } else { %> <% snips.forEach((snip) => { %>
+      <% } else { %> <% snips.forEach((snip) => { %> <% const snipDeleteDialogId
+      = `a${snip.retrievalId}-dialog` %> <% const deleteModalBtnId =
+      `a${snip.retrievalId}-delete-modal-btn` %> <% const cancelModalBtnId =
+      `a${snip.retrievalId}-cancel-modal-btn` %> <% const dialog =
+      `a${snip.retrievalId}Dialog` %> <% const showDialogBtn =
+      `a${snip.retrievalId}ShowDialogBtn` %> <% const cancelDialogBtn =
+      `a${snip.retrievalId}CancelDialogBtn` %>
       <article>
         <% if (authUser && authUser.username === snip.author) { %>
         <nav>
@@ -95,24 +101,20 @@
               <ul>
                 <li><a href="">Edit</a></li>
                 <li>
-                  <a id="<%= `a${snip.retrievalId}-delete-modal-btn` %>" href=""
-                    >Delete</a
-                  >
+                  <a id="<%= deleteModalBtnId %>" href="">Delete</a>
                 </li>
               </ul>
             </details>
           </div>
         </nav>
         <form action="<%= `${deleteUrl}/${snip.retrievalId}` %>" method="post">
-          <dialog id="<%= `a${snip.retrievalId}-dialog` %>">
+          <dialog id="<%= snipDeleteDialogId %>">
             <article>
               <h2>Delete Snip?</h2>
               <p>This action can't be <strong>undone.</strong></p>
               <footer>
                 <button type="button" class="outline" style="border: none">
-                  <a
-                    id="<%= `a${snip.retrievalId}-cancel-model-btn` %>"
-                    style="text-decoration: none"
+                  <a id="<%= cancelModalBtnId %>" style="text-decoration: none"
                     >Cancel</a
                   >
                 </button>
@@ -124,18 +126,18 @@
           </dialog>
         </form>
         <script>
-          const <%= `a${snip.retrievalId}Dialog` %> = document.querySelector(
-            "<%= `#a${snip.retrievalId}-dialog`  %>"
+          const <%= dialog %> = document.querySelector(
+            "<%= `#${snipDeleteDialogId}`  %>"
           );
-          const <%= `a${snip.retrievalId}ShowDialogBtn` %> = document.querySelector("<%= `#a${snip.retrievalId}-delete-modal-btn` %>");
-          const <%= `a${snip.retrievalId}CancelDialogBtn` %> = document.querySelector("<%= `#a${snip.retrievalId}-cancel-model-btn` %>");
-          <%= `a${snip.retrievalId}ShowDialogBtn` %>.addEventListener("click", (event) => {
+          const <%= showDialogBtn %> = document.querySelector("<%= `#${deleteModalBtnId}` %>");
+          const <%= cancelDialogBtn %> = document.querySelector("<%= `#${cancelModalBtnId}` %>");
+          <%= showDialogBtn %>.addEventListener("click", (event) => {
             event.preventDefault();
-            <%= `a${snip.retrievalId}Dialog` %>.showModal();
+            <%= dialog %>.showModal();
           });
-          <%= `a${snip.retrievalId}CancelDialogBtn` %>.addEventListener("click", (event) => {
+          <%= cancelDialogBtn %>.addEventListener("click", (event) => {
             event.preventDefault();
-            <%= `a${snip.retrievalId}Dialog` %>.close();
+            <%= dialog %>.close();
           });
         </script>
         <% } else { %>
