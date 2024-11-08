@@ -4,7 +4,7 @@ const handler = require("../controllers/serviceController");
 
 const BASE = "/api/v1/service";
 const SUBMIT_SNIP = `${BASE}/submitSnip`;
-const DELETE_SNIP = `${BASE}/deleteSnip/:id`;
+const DELETE_SNIP = `${BASE}/deleteSnip`;
 
 const endpoints = {
   BASE,
@@ -15,7 +15,7 @@ const endpoints = {
 const router = express.Router();
 
 router.post(SUBMIT_SNIP, handler.submitSnip);
-router.post(DELETE_SNIP, requireAuth(), handler.deleteSnip);
+router.post(DELETE_SNIP + "/:id", requireAuth(), handler.deleteSnip);
 
 module.exports = {
   router,

@@ -92,11 +92,50 @@
               </summary>
               <ul>
                 <li><a href="">Edit</a></li>
-                <li><a href="">Delete</a></li>
+                <li>
+                  <a id="<%= `a${snip.retrievalId}-delete-modal-btn` %>" href=""
+                    >Delete</a
+                  >
+                </li>
               </ul>
             </details>
           </div>
         </nav>
+        <form action="<%= `${deleteUrl}/${snip.retrievalId}` %>" method="post">
+          <dialog id="<%= `a${snip.retrievalId}-dialog` %>">
+            <article>
+              <h2>Delete Snip?</h2>
+              <p>This action can't be <strong>undone.</strong></p>
+              <footer>
+                <button type="button" class="outline" style="border: none">
+                  <a
+                    id="<%= `a${snip.retrievalId}-cancel-model-btn` %>"
+                    style="text-decoration: none"
+                    >Cancel</a
+                  >
+                </button>
+                <button style="background-color: red; border-color: crimson">
+                  DELETE
+                </button>
+              </footer>
+            </article>
+          </dialog>
+        </form>
+        <script>
+          const <%= `a${snip.retrievalId}Dialog` %> = document.querySelector(
+            "<%= `#a${snip.retrievalId}-dialog`  %>"
+          );
+          const <%= `a${snip.retrievalId}ShowDialogBtn` %> = document.querySelector("<%= `#a${snip.retrievalId}-delete-modal-btn` %>");
+          const <%= `a${snip.retrievalId}CancelDialogBtn` %> = document.querySelector("<%= `#a${snip.retrievalId}-cancel-model-btn` %>");
+          <%= `a${snip.retrievalId}ShowDialogBtn` %>.addEventListener("click", (event) => {
+            event.preventDefault();
+            <%= `a${snip.retrievalId}Dialog` %>.showModal();
+          });
+          <%= `a${snip.retrievalId}CancelDialogBtn` %>.addEventListener("click", (event) => {
+            event.preventDefault();
+            <%= `a${snip.retrievalId}Dialog` %>.close();
+          });
+        </script>
         <% } else { %>
         <h3><a href="<%= `/${snip.retrievalId}` %>"><%= snip.title %></a></h3>
         <% } %>

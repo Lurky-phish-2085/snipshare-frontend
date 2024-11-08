@@ -30,6 +30,7 @@ const snippet = async (req, res) => {
 };
 
 const authorSnips = async (req, res) => {
+  const deleteUrl = serviceRouteEndpoints.DELETE_SNIP;
   const logoutUrl = authRouteEndpoints.LOGOUT;
 
   const { authUser } = req;
@@ -37,7 +38,13 @@ const authorSnips = async (req, res) => {
 
   const snips = await Snip.findByAuthor(name);
 
-  res.render("authorSnips", { snips, name, authUser, logoutUrl });
+  res.render("authorSnips", {
+    snips,
+    name,
+    authUser,
+    deleteUrl,
+    logoutUrl,
+  });
 };
 
 const login = (req, res) => {
