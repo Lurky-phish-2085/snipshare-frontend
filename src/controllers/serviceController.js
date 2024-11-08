@@ -10,6 +10,17 @@ const submitSnip = async (req, res) => {
   res.redirect(`/${id}`);
 };
 
+const patchSnip = async (req, res) => {
+  const { authUser } = req;
+  const { jwt } = req.cookies;
+  const { id } = req.params;
+  const update = req.body;
+
+  await Snip.update(id, jwt, update);
+
+  res.redirect(`/${id}`);
+};
+
 const deleteSnip = async (req, res) => {
   const { authUser } = req;
   const { id } = req.params;
@@ -22,5 +33,6 @@ const deleteSnip = async (req, res) => {
 
 module.exports = {
   submitSnip,
+  patchSnip,
   deleteSnip,
 };
