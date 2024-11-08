@@ -10,6 +10,17 @@ const submitSnip = async (req, res) => {
   res.redirect(`/${id}`);
 };
 
+const deleteSnip = async (req, res) => {
+  const { authUser } = req;
+  const { id } = req.params;
+  const { jwt } = req.cookies;
+
+  await Snip.deleteById(id, jwt);
+
+  res.redirect(`/u/${authUser.username}`);
+};
+
 module.exports = {
   submitSnip,
+  deleteSnip,
 };
