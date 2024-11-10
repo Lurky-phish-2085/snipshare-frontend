@@ -128,16 +128,16 @@
         </p>
       </nav>
       <article>
-        <p><%= snip.content %></p>
         <textarea name="content" rows="20" cols="50" readonly>
-          <%= snip.content %></textarea
+<%= snip.content %></textarea
         >
-        <h2>NOT FOUND</h2>
-        <p>Snip must have been expired, disposed, or deleted by the owner.</p>
-        <form action="/" , method="get">
-          <button type="submit">Create Snip</button>
-        </form>
       </article>
+      <% } %> <% } else { %>
+      <h2>NOT FOUND</h2>
+      <p>Snip must have been expired, disposed, or deleted by the owner.</p>
+      <form action="/" , method="get">
+        <button type="submit">Create Snip</button>
+      </form>
       <% } %>
     </main>
   </body>
