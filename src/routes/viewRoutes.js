@@ -10,6 +10,7 @@ router.get("/login", redirectWhenAuthenticated(), handler.login);
 router.get("/register", redirectWhenAuthenticated(), handler.register);
 router.get("/profile", requireAuth(), handler.profile);
 router.get("/u/:name", handler.authorSnips);
+router.get("/:id/edit", requireAuth(), handler.snipEdit);
 router.get("/:id", handler.snippet);
 
 router.post("/:id", handler.snippet);

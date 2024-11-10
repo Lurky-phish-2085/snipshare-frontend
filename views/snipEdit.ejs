@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SnipShare</title>
+    <meta charset="UTF-8" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/favicons/favicon-48x48.png"
+      sizes="48x48"
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg" />
+    <link rel="shortcut icon" href="/favicons/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicons/apple-touch-icon.png"
+    />
+    <link rel="manifest" href="/favicons/site.webmanifest" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    />
+  </head>
+  <body>
+    <header class="container">
+      <nav>
+        <hgroup>
+          <a style="text-decoration: none" href="/">
+            <h1 style="margin: 0">SnipShare</h1>
+          </a>
+          <p>Share snippets of text easily!</p>
+        </hgroup>
+        <div>
+          <% if (authUser) { %>
+          <ul>
+            <li><a href="<%= `/u/${authUser.username}` %>">My Snips</a></li>
+            <li>
+              <details class="dropdown">
+                <summary style="border: none" role="button" class="outline">
+                  <%= authUser.username %>
+                </summary>
+                <ul>
+                  <li><a href="/profile">Profile</a></li>
+                  <li><a href="<%= logoutUrl %>">Logout</a></li>
+                </ul>
+              </details>
+            </li>
+          </ul>
+          <% } else { %>
+          <ul>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+          </ul>
+          <% } %>
+        </div>
+      </nav>
+    </header>
+    <main class="container">
+      <form
+        id="form"
+        action="<%= `${patchSnipUrl}/${snip.retrievalId}` %>"
+        ,
+        method="post"
+      >
+        <label for="title">
+          Title
+          <input type="text" name="title" value="<%= snip.title %>" required />
+        </label>
+        <label for="content">
+          Content
+          <textarea name="content" rows="12" cols="50" required>
+<%= snip.content %></textarea
+          >
+        </label>
+        <fieldset>
+          <label for="expiryDate">
+            Expiry Date
+            <input
+              type="date"
+              name="expiryDate"
+              value="<%= snip.expiryDate %>"
+            />
+          </label>
+        </fieldset>
+        <button type="submit">Save</button>
+      </form>
+      <button style="border: none" class="outline secondary" type="submit">
+        <a style="text-decoration: none" href="<%= `/u/${authUser.username}` %>"
+          >Cancel</a
+        >
+      </button>
+    </main>
+  </body>
+</html>

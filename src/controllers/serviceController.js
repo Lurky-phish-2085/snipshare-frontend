@@ -11,7 +11,6 @@ const submitSnip = async (req, res) => {
 };
 
 const patchSnip = async (req, res) => {
-  const { authUser } = req;
   const { jwt } = req.cookies;
   const { id } = req.params;
   const update = req.body;

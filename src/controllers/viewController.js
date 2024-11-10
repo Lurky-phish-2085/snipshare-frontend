@@ -47,6 +47,23 @@ const authorSnips = async (req, res) => {
   });
 };
 
+const snipEdit = async (req, res) => {
+  const patchSnipUrl = serviceRouteEndpoints.PATCH_SNIP;
+  const logoutUrl = authRouteEndpoints.LOGOUT;
+  const { id } = req.params;
+  const { authUser } = req;
+
+  const snip = await Snip.findById(id);
+
+  res.render("snipEdit", {
+    snip,
+    id,
+    authUser,
+    patchSnipUrl,
+    logoutUrl,
+  });
+};
+
 const login = (req, res) => {
   const loginUrl = authRouteEndpoints.LOGIN;
 
@@ -71,6 +88,7 @@ module.exports = {
   index,
   snippet,
   authorSnips,
+  snipEdit,
   login,
   register,
   profile,

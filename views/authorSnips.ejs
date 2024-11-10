@@ -68,7 +68,8 @@
     </header>
     <main id="main" class="container">
       <h2>
-        <%= (authUser.username === name) ? "Your Snips" : `${name}'s Snips` %>
+        <%= (authUser && authUser.username === name) ? "Your Snips" : `${name}'s
+        Snips` %>
       </h2>
       <% if (snips.length === 0) { %>
       <h3>SNIPS EMPTY</h3>
@@ -99,7 +100,9 @@
                 </svg>
               </summary>
               <ul>
-                <li><a href="">Edit</a></li>
+                <li>
+                  <a href="<%= `/${snip.retrievalId}/edit` %>">Edit</a>
+                </li>
                 <li>
                   <a id="<%= deleteModalBtnId %>" href="">Delete</a>
                 </li>
